@@ -1,3 +1,7 @@
-body {
-    background-color: skyblue;
+@import "~bulma/css/bulma.min.css";
+
+.field4 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
