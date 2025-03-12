@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: symfony-app-Ecilia
+    runtime: php
+    region: oregon
+    plan: free
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: DATABASE_URL
+        fromDatabase:
+          name: ecilia
+      - key: APP_SECRET
+        generateValue: true
+    buildCommand: "./render-build.sh"
+    startCommand: "php -S 0.0.0.0:10000 -t public"
+
+databases:
+  - name: mysql-db
+    databaseName: ecilia_db
+    user: symfony_user
+    plan: free
+    region: oregon
+    ipAllowList: []
