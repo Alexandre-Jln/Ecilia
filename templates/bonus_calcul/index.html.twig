@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Calcul du Bonus{% endblock %}
+
+{% block body %}
+    <section class="hero is-light is-fullheight has-background-beige">
+        <div class="hero-body">
+            <div class="container">
+                <div class="columns is-centered">
+                    <div class="column is-half">
+                        <div class="box">
+                            <h1 class="title has-text-centered has-text-white">Calcul du Bonus</h1>
+                            <h2 class="subtitle has-text-centered has-text-white">Entrez les informations nécessaires pour calculer le bonus final</h2>
+
+                            <form method="POST">
+                                <div class="field">
+                                    <label class="label" for="bonus_initial">Bonus Initial :</label>
+                                    <div class="control">
+                                        <input class="input is-white" type="number" name="bonus_initial" id="bonus_initial" step="0.01" required>
+                                    </div>
+                                </div>
+
+                                <div class="field">
+                                    <label class="label" for="annees_sans_accident">Nombre d'années sans accident :</label>
+                                    <div class="control">
+                                        <input class="input is-white" type="number" name="annees_sans_accident" id="annees_sans_accident" step="1" required>
+                                    </div>
+                                </div>
+
+                                <div class="field">
+                                    <label class="label" for="accidents_responsables">Nombre d'accidents responsables :</label>
+                                    <div class="control">
+                                        <input class="input is-white" type="number" name="accidents_responsables" id="accidents_responsables" step="1" required>
+                                    </div>
+                                </div>
+
+                                <div class="field4">
+                                    <div class="control">
+                                        <button type="submit" class="button is-small is-link">Calculer</button>
+                                    </div>
+                                </div>
+
+                            </form>
+
+                            {% for message in app.flashes('success') %}
+                                <div class="notification is-success mt-4">
+                                    <h3 class="title is-4 has-text-centered">Résultat :</h3>
+                                    <p class="has-text-centered">
+                                        Votre bonus est de : <strong>{{ result|number_format(2) }}%</strong>
+                                    </p>
+                                </div>
+                            {% endfor %}
+
+                            {# Afficher les erreurs si elles existent #}
+                            {% for message in app.flashes('error') %}
+                                <div class="notification is-danger mt-4">
+                                    <p class="has-text-centered">{{ message }}</p>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
